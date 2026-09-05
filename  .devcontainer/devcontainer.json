@@ -8,5 +8,6 @@
       ]
     }
   },
-  "postCreateCommand": "chmod +x *.sh && ./restore.sh"
+  "postCreateCommand": "chmod +x *.sh && ./restore.sh",
+  "postStartCommand": "chmod +x monitor.sh backup.sh restore.sh 2>/dev/null; nohup ./monitor.sh > monitor.log 2>&1 &"
 }
