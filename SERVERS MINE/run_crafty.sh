@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /workspaces/MINENENENENE/SERVERS MINE
+cd "/workspaces/MINENENENENE/SERVERS MINE"
 source .venv/bin/activate 
 cd crafty-4 
 exec python3 main.py 

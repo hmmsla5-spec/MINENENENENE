@@ -8,6 +8,6 @@
       ]
     }
   },
-  "postCreateCommand": "chmod +x *.sh && ./restore.sh",
-  "postStartCommand": "chmod +x monitor.sh backup.sh restore.sh 2>/dev/null; nohup ./monitor.sh > monitor.log 2>&1 &"
+  "postCreateCommand": "chmod +x *.sh && ./restore.sh && sudo mkdir -p /run/playit && sudo chmod 777 /run/playit && cd 'SERVERS MINE' && rm -rf .venv && python3 -m venv .venv && source .venv/bin/activate && cd crafty-4 && pip install -r requirements.txt",
+  "postStartCommand": "unset GITHUB_TOKEN; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; chmod +x monitor.sh backup.sh restore.sh check_horas.sh 2>/dev/null; nohup ./monitor.sh > monitor.log 2>&1 &"
 }
