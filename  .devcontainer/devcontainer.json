@@ -8,6 +8,6 @@
       ]
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openjdk-17-jdk && chmod +x *.sh && ./restore.sh && sudo mkdir -p /run/playit && sudo chmod 777 /run/playit && cd 'SERVERS MINE' && rm -rf .venv && python3 -m venv .venv && source .venv/bin/activate && cd crafty-4 && pip install -r requirements.txt",
-  "postStartCommand": "unset GITHUB_TOKEN; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; chmod +x monitor.sh backup.sh restore.sh check_horas.sh 2>/dev/null; nohup ./monitor.sh > monitor.log 2>&1 &"
+  "postCreateCommand": "bash -c 'set -e; sudo apt-get update; sudo apt-get install -y openjdk-17-jdk curl gnupg; curl -SsL https://packages.playit.gg/keys/playit.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/playit.gpg >/dev/null; sudo chmod 0644 /usr/share/keyrings/playit.gpg; sudo curl -fsSL -o /etc/apt/sources.list.d/playit.list https://packages.playit.gg/repo-files/playit-debian.list; sudo apt-get update; sudo apt-get install -y playit; chmod +x *.sh; ./restore.sh; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; cd \"SERVERS MINE\"; rm -rf .venv; python3 -m venv .venv; source .venv/bin/activate; cd crafty-4; pip install -r requirements.txt'",
+  "postStartCommand": "unset GITHUB_TOKEN; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; chmod +x monitor.sh backup.sh restore.sh check_horas.sh 2>/dev/null; nohup playitd > /tmp/playitd.log 2>&1 & nohup ./monitor.sh > monitor.log 2>&1 &"
 }
