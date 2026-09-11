@@ -23,7 +23,14 @@ gh release download "$LATEST" --repo "$BACKUP_REPO" --dir /tmp/restore --clobber
 
 echo "Extraindo backup..."
 mkdir -p /tmp/restore_extract
-tar -xzf /tmp/restore/*.tar.gz -C /tmp/restore_extract
+
+if compgen -G "/tmp/restore/*.tar.gz_part_*" > /dev/null; then
+  echo "Backup dividido em partes, juntando..."
+  cat /tmp/restore/*.tar.gz_part_* > /tmp/restore/backup_completo.tar.gz
+  tar -xzf /tmp/restore/backup_completo.tar.gz -C /tmp/restore_extract
+else
+  tar -xzf /tmp/restore/*.tar.gz -C /tmp/restore_extract
+fi
 
 echo "Restaurando 'SERVERS MINE' em $RESTORE_TARGET..."
 rm -rf "$RESTORE_TARGET/SERVERS MINE"
