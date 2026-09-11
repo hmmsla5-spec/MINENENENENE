@@ -1,6 +1,6 @@
 {
   "name": "Minecraft Server",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -8,6 +8,6 @@
       ]
     }
   },
-  "postCreateCommand": "chmod +x *.sh && ./restore.sh && sudo mkdir -p /run/playit && sudo chmod 777 /run/playit && cd 'SERVERS MINE' && rm -rf .venv && python3 -m venv .venv && source .venv/bin/activate && cd crafty-4 && pip install -r requirements.txt",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y openjdk-17-jdk && chmod +x *.sh && ./restore.sh && sudo mkdir -p /run/playit && sudo chmod 777 /run/playit && cd 'SERVERS MINE' && rm -rf .venv && python3 -m venv .venv && source .venv/bin/activate && cd crafty-4 && pip install -r requirements.txt",
   "postStartCommand": "unset GITHUB_TOKEN; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; chmod +x monitor.sh backup.sh restore.sh check_horas.sh 2>/dev/null; nohup ./monitor.sh > monitor.log 2>&1 &"
 }
