@@ -11,6 +11,6 @@
       ]
     }
   },
-  "postCreateCommand": "bash -c 'chmod +x *.sh; sudo mkdir -p /home/codespace/.config; sudo chown -R $(whoami):$(whoami) /home/codespace; ./restore.sh; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; cd \"SERVERS MINE\"; rm -rf .venv; python3 -m venv .venv; source .venv/bin/activate; cd crafty-4; pip install -r requirements.txt'",
+  "postCreateCommand": "bash -c 'sudo apt-get update || true; sudo apt-get install -y --no-install-recommends openjdk-17-jdk git-lfs python3-venv python3-pip || true; git lfs install || true; chmod +x *.sh; sudo mkdir -p /home/codespace/.config; sudo chown -R $(whoami):$(whoami) /home/codespace; ./restore.sh; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; cd \"SERVERS MINE\"; rm -rf .venv; python3 -m venv .venv; source .venv/bin/activate; cd crafty-4; pip install -r requirements.txt'",
   "postStartCommand": "unset GITHUB_TOKEN; sudo mkdir -p /run/playit; sudo chmod 777 /run/playit; chmod +x monitor.sh backup.sh restore.sh check_horas.sh 2>/dev/null; nohup playitd > /tmp/playitd.log 2>&1 & nohup ./monitor.sh > monitor.log 2>&1 &"
 }
