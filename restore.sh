@@ -3,9 +3,7 @@ set -e
 
 # ===== CONFIGURAÇÃO =====
 BACKUP_REPO="hmmsla5-spec/crafty-backups"
-# Pasta onde os dados do servidor devem ser restaurados (a pasta PAI de "SERVERS MINE")
 RESTORE_TARGET="/workspaces/MINENENENENE"
-# Pasta onde a config do playit deve ser restaurada
 PLAYIT_TARGET="/home/codespace/.config"
 # =========================
 
@@ -20,6 +18,9 @@ fi
 echo "Baixando release: $LATEST"
 mkdir -p /tmp/restore
 gh release download "$LATEST" --repo "$BACKUP_REPO" --dir /tmp/restore --clobber
+
+echo "Juntando as partes do backup..."
+cat /tmp/restore/*_part_* > /tmp/restore/crafty-backup.tar.gz
 
 echo "Extraindo backup..."
 mkdir -p /tmp/restore_extract
